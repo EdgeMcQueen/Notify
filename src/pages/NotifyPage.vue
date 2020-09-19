@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Notify from '@/components/Notify.vue';
 
 
@@ -38,14 +39,25 @@ export default {
   data() {
     return {
       loading: false,
-      messages: [
-        {title: 'message 1'},
-        {title: 'message 2'},
-        {title: 'message 3'},
-        {title: 'message 4'},
-        {title: 'message 5'},
-        {title: 'message 6'}
-      ]
+      messages: []
+    }
+  },
+  mounted() {
+    this.getNotify()
+  },
+  methods: {
+    getNotify () {
+      this.loading = true
+      axios
+        .get('http://localhost/notify/notifyApi.php')
+          .then(response => {
+            let res = response.data.notify
+            this.messages = res
+          })
+          .catch(error => {
+            console.log(error)
+          })
+          .finally(() => (this.loading = false))
     }
   },
 }
