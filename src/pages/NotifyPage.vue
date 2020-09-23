@@ -98,11 +98,8 @@ export default {
 <style lang="scss" scoped>
   .container {
     display: flex;
-    align-items: center;
     justify-content: center;
-    height: 90vh;
-    min-height: 900px;
-
+    height: auto;
   }
 
   .notify {
